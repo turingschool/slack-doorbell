@@ -18,13 +18,13 @@ server.post('/messages', function (request, response, next) {
   var phoneNumber = request.params.From;
   var message = request.params.Body;
 
-  slacker(message, function (err, slackResponse, body) {
+  slacker(phoneNumber, message, function (err, slackResponse, body) {
     if (err) {
       console.error(err);
       messenger.send(phoneNumber, 'There was some kind of error.');
       response.send(500, err);
     }
-    messenger.send(phoneNumber, 'Got it! Someone will be there shortly!');
+    messenger.send(phoneNumber, 'Got it! Someone will be up shortly to let you in.');
     response.send(200, 'ok');
   });
 });
